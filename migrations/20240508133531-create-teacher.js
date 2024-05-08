@@ -2,49 +2,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Students', {
+    await queryInterface.createTable('Teachers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      nis: {
+      fullname: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull:false,
+      },
+      start_date: {
+        type: Sequelize.DATE,
+        allowNull:false,
       },
       is_active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
       },
-      date_of_birth: {
-        type: Sequelize.DATE
-      },
-      place_of_birth: {
-        type: Sequelize.STRING
+      end_date: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       province: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
       },
-      city_regency: {
+      regency: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
       },
       sub_regency: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
       },
       address: {
         type: Sequelize.TEXT,
-        allowNull: true
-      },
-      photo: {
-        type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
@@ -59,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Students');
+    await queryInterface.dropTable('Teachers');
   }
 };
