@@ -1,4 +1,4 @@
-const {genSalt, hash, compare} = require('bcrypt')
+const {genSaltSync, hashSync, compare} = require('bcrypt')
 
 class Bcrypt {
     saltRound
@@ -7,14 +7,14 @@ class Bcrypt {
         this.saltRound = 10
     }
 
-    generateSalt = async () => {
-        return await genSalt(this.saltRound)
+    generateSalt = () => {
+        return genSaltSync(this.saltRound)
     }
 
-    hashPassword = async (realPassword) => {
-        let saltBcrypt = await this.generateSalt()
+    hashPassword = (realPassword) => {
+        let saltBcrypt = this.generateSalt()
 
-        return await hash(realPassword, saltBcrypt)
+        return hashSync(realPassword, saltBcrypt)
     }
 }
 
