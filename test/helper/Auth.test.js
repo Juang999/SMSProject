@@ -6,3 +6,14 @@ test ('compare password', async () => {
 
     expect(() => comparationPassword).toThrow('ups anda menggunaakan fitur ini!')
 })
+
+test ('test attempt', async () => {
+    let result = await Auth.attempt({
+        username: 'super-admin',
+        password: '12345'
+    })
+
+    console.info(result)
+
+    expect(result.status).toBeTruthy()
+})
