@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Student.init({
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: DataTypes.STRING,
     nis: DataTypes.STRING,
