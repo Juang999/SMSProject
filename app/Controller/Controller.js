@@ -1,10 +1,14 @@
-const AuthController = require('./Auth/AuthController')
+const AuthController = require('./User/AuthController');
+const TeacherController = require('./User/TeacherController');
+const StudentController = require('./User/StudentController');
 
 class Controller {
     constructor () {
         return {
-            AuthController: AuthController
-        }
+            AuthController: AuthController,
+            TeacherController: TeacherController,
+            StudentController: StudentController
+        };
     }
 }
 
