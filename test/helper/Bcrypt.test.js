@@ -14,3 +14,22 @@ test ('get hashed password', async () => {
 
     expect(hashedPassword).toBeDefined()
 })
+
+
+describe ('test encrypt & decrypt id', () => {
+    let encryptedData;
+    
+    test ('get encrypted id', () => {
+        encryptedData = Bcrypt.AESEncrypt(1)
+        console.info(encryptedData)
+    
+        expect(encryptedData).toBeDefined();
+    })
+
+    test ('get decrypted id', () => {
+        let decryptedData = Bcrypt.AESDecrypt(encryptedData);
+        console.info(decryptedData)
+
+        expect(decryptedData).toBe(`1`)
+    })
+})

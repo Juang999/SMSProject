@@ -17,3 +17,10 @@ test ('test attempt', async () => {
 
     expect(result.status).toBeTruthy()
 })
+
+test ('find user test', async () => {
+    let dataUser = await Auth.findUser('super-admin');
+    console.info(dataUser)
+
+    expect(dataUser).toBeDefined();
+})
