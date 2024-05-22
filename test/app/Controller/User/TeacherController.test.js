@@ -106,3 +106,19 @@ describe('bulk testing check data', () => {
         expect(requestsUpdateData.status).toBeFalsy()
     })
 })
+
+describe.only('test delete data teacher', () => {
+    test (`test to delete teacher while data doesn't exist`, async () => {
+        let status = await TeacherController.delete(16)
+        console.info(status)
+
+        expect(status).toBeFalsy()
+    })
+
+    test('test to delete data teacher while data exist', async () => {
+        let status = await TeacherController.delete(18)
+        console.info(status)
+
+        expect(status).toBeDefined()
+    })
+})
