@@ -42,6 +42,8 @@ class TeacherController {
     }
 
     createDataTeacher = (req, res) => {
+        let photoPath = (this.uploadFile(req.files)) ? this.uploadFile(req.files) : null;
+
         Teacher.create({
             fullname: req.body.fullname,
             start_date: req.body.start_date,
@@ -54,7 +56,7 @@ class TeacherController {
             email: (req.body.email) ? req.body.email : null,
             phone_number_1: (req.body.phone_number_1) ? req.body.phone_number_1 : null,
             phone_number_2: (req.body.phone_number_2) ? req.body.phone_number_2 : null,
-            photo: (req.body.photo) ? req.body.photo : null
+            photo: photoPath
         })
         .then(result => {
             res.status(200)
@@ -136,6 +138,36 @@ class TeacherController {
         }
     }
 
+    delete = async (req, res) => {
+        try {
+            let {status} = await this.checkDataTeacher(id)
+    
+            if (status == false) {
+                return false;
+            }
+    
+            let dataTeacher = await Teacher.destroy({
+                where: {
+                    id: id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: dataTeacher,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
     updateDataTeacher = async (request, dataTeacher, id) => {
         let requests = await this.requestUpdateData(request, dataTeacher, id);
 
@@ -196,6 +228,21 @@ class TeacherController {
         let dataTeacher = await Teacher.findByPk(id);
 
         return (dataTeacher) ? {data: dataTeacher.dataValues, status: true} : {data: null, status: false};
+    }
+
+    uploadFile = (files) => {
+        let path;
+
+        if (files) {
+            console.info(files.photo)
+            let file = files.photo
+            let filename = file.name
+            path = `/images/user/teacher/${filename}`
+
+            file.mv(`./public/images/user/teacher/${filename}`)
+        }
+
+        return path;
     }
 }
 
