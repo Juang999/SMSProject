@@ -2,6 +2,7 @@ const {
     Teacher
 } = require('../../../models')
 const {Op} = require('sequelize')
+const fs = require('fs')
 
 class TeacherController {
     index = (req, res) => {
@@ -168,6 +169,129 @@ class TeacherController {
         }
     }
 
+    activateTeacher = async (req, res) => {
+        try {
+            let {data, status} = await this.checkDataTeacher(req.params.id)
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+
+                return;
+            }
+
+            let result = await Teacher.update({
+                is_active: (data.is_active == true) ? false: true
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    changePhotoTeacher = async (req, res) => {
+        try {
+            let {data, status} = await this.checkDataTeacher(req.params.id);
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+
+                return;
+            }
+
+            if (data.photo != null) this.removeImage(data.photo)
+
+            let photoPath = (this.uploadFile(req.files)) ? this.uploadFile(req.files) : null;
+
+            let result = Teacher.update({
+                photo: photoPath
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    removePhotoTeacher = async (req, res) => {
+        try {
+            let {data, status} = await this.checkDataTeacher(req.params.id);
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+
+                return;
+            }
+
+            if (data.photo != null) this.removeImage(data.photo)
+
+            let result = Teacher.update({
+                photo: null
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
     updateDataTeacher = async (request, dataTeacher, id) => {
         let requests = await this.requestUpdateData(request, dataTeacher, id);
 
@@ -234,7 +358,6 @@ class TeacherController {
         let path;
 
         if (files) {
-            console.info(files.photo)
             let file = files.photo
             let filename = file.name
             path = `/images/user/teacher/${filename}`
@@ -243,6 +366,14 @@ class TeacherController {
         }
 
         return path;
+    }
+
+    removeImage = (filepath) => {
+        fs.unlink(`./public${filepath}`, (err) => {
+            if (err) {
+                console.info(err.message)
+            }
+        })
     }
 }
 
