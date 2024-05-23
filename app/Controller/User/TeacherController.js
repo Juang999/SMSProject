@@ -42,7 +42,7 @@ class TeacherController {
         })
     }
 
-    createDataTeacher = (req, res) => {
+    store = (req, res) => {
         let photoPath = (this.uploadFile(req.files)) ? this.uploadFile(req.files) : null;
 
         Teacher.create({
@@ -141,7 +141,7 @@ class TeacherController {
 
     delete = async (req, res) => {
         try {
-            let {status} = await this.checkDataTeacher(id)
+            let {status} = await this.checkDataTeacher(req.params.id)
     
             if (status == false) {
                 return false;
@@ -149,7 +149,7 @@ class TeacherController {
     
             let dataTeacher = await Teacher.destroy({
                 where: {
-                    id: id
+                    id: req.params.id
                 }
             })
 

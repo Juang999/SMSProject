@@ -107,7 +107,7 @@ describe('bulk testing check data', () => {
     })
 })
 
-describe.only('test delete data teacher', () => {
+describe('test delete data teacher', () => {
     test (`test to delete teacher while data doesn't exist`, async () => {
         let status = await TeacherController.delete(16)
         console.info(status)
@@ -120,5 +120,21 @@ describe.only('test delete data teacher', () => {
         console.info(status)
 
         expect(status).toBeDefined()
+    })
+})
+
+describe.only('test activate data teacher', () => {
+    test.concurrent('activate data teacher while data exist', async () => {
+        let result = await TeacherController.activateTeacher(7)
+        console.info(result)
+
+        expect(result).toEqual([1])
+    })
+
+    test.concurrent(`activate data teacher while data doesn't exist`, async () => {
+        let result = await TeacherController.activateTeacher(8)
+        console.info(result)
+
+        expect(result).toBeFalsy();
     })
 })
