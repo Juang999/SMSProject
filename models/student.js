@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Student',
-    schema: 'public'
+    schema: 'public',
+    paranoid: true
   });
   return Student;
 };
