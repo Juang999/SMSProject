@@ -1,9 +1,10 @@
 const {Router} = require('express')
 const router = Router()
 const {
+    MasterController,
     TeacherController,
     StudentController,
-    MasterController,
+    PeriodeController,
 } = require('../app/Controller/Controller')
 const {
     Authorization,
@@ -19,10 +20,10 @@ router.post('/input-code', [Authorization, SuperadminMiddleware], MasterControll
 *   router for teacher feature
 */
 router.get('/teacher', [Authorization, SuperadminMiddleware], TeacherController.index);
+router.post('/teacher/create', [Authorization, SuperadminMiddleware], TeacherController.store);
 router.get('/teacher/:id/detail', [Authorization, SuperadminMiddleware], TeacherController.show);
 router.put('/teacher/:id/update', [Authorization, SuperadminMiddleware], TeacherController.update);
 router.delete('/teacher/:id/delete', [Authorization, SuperadminMiddleware], TeacherController.delete);
-router.post('/teacher/create', [Authorization, SuperadminMiddleware], TeacherController.createDataTeacher);
 router.patch('/teacher/:id/activate', [Authorization, SuperadminMiddleware], TeacherController.activateTeacher);
 router.patch('/teacher/:id/change-photo', [Authorization, SuperadminMiddleware], TeacherController.changePhotoTeacher);
 router.patch('/teacher/:id/remove-photo', [Authorization, SuperadminMiddleware], TeacherController.removePhotoTeacher);
@@ -30,13 +31,19 @@ router.patch('/teacher/:id/remove-photo', [Authorization, SuperadminMiddleware],
 /*
 *   router for student feature
 */
-router.get('/student', [Authorization, SuperadminMiddleware], StudentController.getDataStudent);
-router.post('/student/create', [Authorization, SuperadminMiddleware], StudentController.inputDataStudent);
-router.put('/student/:id/update', [Authorization, SuperadminMiddleware], StudentController.updateDataStudent);
-router.delete('/student/:id/delete', [Authorization, SuperadminMiddleware], StudentController.deleteDataStudent);
-router.get('/student/:id/detail', [Authorization, SuperadminMiddleware], StudentController.showDetailDataStudent);
-router.patch('/student/:id/activate', [Authorization, SuperadminMiddleware], StudentController.changeStatusStudent);
+router.get('/student', [Authorization, SuperadminMiddleware], StudentController.index);
+router.post('/student/create', [Authorization, SuperadminMiddleware], StudentController.store);
+router.get('/student/:id/detail', [Authorization, SuperadminMiddleware], StudentController.show);
+router.put('/student/:id/update', [Authorization, SuperadminMiddleware], StudentController.update);
+router.delete('/student/:id/delete', [Authorization, SuperadminMiddleware], StudentController.delete);
+router.patch('/student/:id/activate', [Authorization, SuperadminMiddleware], StudentController.activateStudent);
 router.patch('/student/:id/change-photo', [Authorization, SuperadminMiddleware], StudentController.changePhotoStudent);
 router.patch('/student/:id/remove-photo', [Authorization, SuperadminMiddleware], StudentController.removePhotoStudent);
+
+/*
+*   router for periode feature
+*/
+router.get('/periode', [Authorization, SuperadminMiddleware], PeriodeController.index);
+router.post('/periode/create', [Authorization, SuperadminMiddleware], PeriodeController.store);
 
 module.exports = router
