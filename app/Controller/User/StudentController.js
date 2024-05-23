@@ -4,7 +4,7 @@ const {
 const fs = require('fs')
 
 class StudentController {
-    getDataStudent = (req, res) => {
+    index = (req, res) => {
         Student.findAll({
             attributes: [
                 'id',
@@ -31,7 +31,7 @@ class StudentController {
         })
     }
 
-    showDetailDataStudent = async (req, res) => {
+    show = async (req, res) => {
         try {
             let {data, status} = await this.checkExistanceData(req.params.id)
     
@@ -62,7 +62,7 @@ class StudentController {
         }
     }
 
-    inputDataStudent = (req, res) => {
+    store = (req, res) => {
         let photoPath = (this.uploadPhoto(req.files)) ? this.uploadPhoto(req.files) : null;
 
         Student.create({
@@ -95,7 +95,7 @@ class StudentController {
         })
     }
 
-    updateDataStudent = async (req, res) => {
+    update = async (req, res) => {
         try {
             let {data, status} = await this.checkExistanceData(req.params.id);
     
@@ -143,7 +143,7 @@ class StudentController {
         }
     }
 
-    deleteDataStudent = async (req, res) => {
+    delete = async (req, res) => {
         try {
             let {status} = await this.checkExistanceData(req.params.id)
     
@@ -176,7 +176,7 @@ class StudentController {
         }
     }
 
-    changeStatusStudent = async (req, res) => {
+    activateStudent = async (req, res) => {
         try {
             let {data, status} = await this.checkExistanceData(req.params.id)
     
