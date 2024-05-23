@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Periode.hasMany(models.DetailPeriode, {
+        as: 'detail_periode',
+        sourceKey: 'id',
+        foreignKey: 'periode_id'
+      })
     }
   }
   Periode.init({
@@ -18,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    start_date: DataTypes.DATEONLY,
-    end_date: DataTypes.DATEONLY,
+    start_year: DataTypes.INTEGER,
+    end_year: DataTypes.INTEGER,
     is_active: DataTypes.BOOLEAN,
-    year: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Periode',
     schema: 'public',
+    paranoid: true
   });
   return Periode;
 };

@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      DetailPeriode.belongsTo(models.Periode, {
+        as: 'periode',
+        targetKey: 'id',
+        foreignKey: 'periode_id'
+      })
     }
   }
   DetailPeriode.init({
