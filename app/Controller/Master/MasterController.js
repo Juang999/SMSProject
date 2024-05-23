@@ -55,7 +55,7 @@ class MasterController {
         CodeMaster.findAll({
             attributes: [
                 'id',
-                'code_name'
+                ['code_name', 'type']
             ],
             where: {
                 code_field: 'class-type'
@@ -77,6 +77,104 @@ class MasterController {
                     error: err.message
                 })
         })
+    }
+
+    getClassName = (req, res) => {
+        CodeMaster.findAll({
+            attributes: [
+                'id',
+                ['code_name', 'class']
+            ],
+            where: {
+                code_field: 'class-name'
+            }
+        })
+            .then(result => {
+                res.status(200)
+                    .json({
+                        status: 'success',
+                        data: result,
+                        error: null
+                    })
+            })
+            .catch(err => {
+                res.status(400)
+                    .json({
+                        status: 'failed',
+                        data: null,
+                        error: err.message
+                    })
+            })
+    }
+
+    getClassGrade = (req, res) => {
+        CodeMaster.findAll({
+            attributes: [
+                'id',
+                ['code_name', 'grade']
+            ],
+            where: {
+                code_field: 'grade'
+            }
+        })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
+    }
+
+    getSemester = (req, res) => {
+        CodeMaster.findAll({
+            attributes: [
+                'id',
+                ['code_name', 'semester']
+            ],
+            where: {
+                code_field: 'semester'
+            }
+        })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
+    }
+
+    getDataWithSpesificField = async (field) => {
+        let dataMaster = await CodeMaster.findAll({
+            attributes: [
+                'id',
+                'code_name'
+            ],
+            where: {
+                code_field: field
+            }
+        })
+
+        return;
     }
 
     formCode = async (field) => {

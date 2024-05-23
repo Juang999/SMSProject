@@ -10,6 +10,11 @@ var fileUpload = require('express-fileupload');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var teacherRouter = require('./routes/teacher');
+var studentRouter = require('./routes/student');
+var headmasterRouter = require('./routes/headmaster');
+
+var masterRouter = require('./routes/master');
 
 var app = express();
 
@@ -27,6 +32,11 @@ app.use(fileUpload());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/teacher', teacherRouter);
+app.use('/student', studentRouter);
+app.use('/headmaster', headmasterRouter);
+
+app.use('/master', masterRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

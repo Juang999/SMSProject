@@ -1,29 +1,65 @@
 const {
     Student
 } = require('../../../models')
+const fs = require('fs')
 
 class StudentController {
-    getDataStudent = async () => {
-        let dataStudent = await Student.findAll({
+    getDataStudent = (req, res) => {
+        Student.findAll({
             attributes: [
                 'id',
                 'name',
                 'nis',
                 'is_active',
             ]
-        });
-
-        return dataStudent;
+        })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
     }
 
-    showDetailDataStudent = async (id) => {
-        let {data, status} = await this.checkExistanceData(id)
-
-        if (status == false) {
-            return false;
+    showDetailDataStudent = async (req, res) => {
+        try {
+            let {data, status} = await this.checkExistanceData(req.params.id)
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: null
+                    })
+                
+                return;
+            }
+    
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: data,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
         }
-
-        return data;
     }
 
     inputDataStudent = (req, res) => {
@@ -47,7 +83,7 @@ class StudentController {
                     status: 'success',
                     data: result,
                     error: null
-                });
+                })
         })
         .catch(err => {
             res.status(400)
@@ -55,47 +91,224 @@ class StudentController {
                     status: 'failed',
                     data: null,
                     error: err.message
-                });
-        });
+                })
+        })
     }
 
-    updateDataStudent = async (request, id) => {
-        let {data, status} = await this.checkExistanceData(id);
+    updateDataStudent = async (req, res) => {
+        try {
+            let {data, status} = await this.checkExistanceData(req.params.id);
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: null
+                    })
 
-        if (status == false) {
-            return false;
-        }
-
-        let requests = this.requestUpdateStudent(request, data);
-
-        let result = await Student.update({
-            name: requests.name,
-            is_active: requests.is_active,
-            date_of_birth: requests.date_of_birth,
-            place_of_birth: requests.place_of_birth,
-            province: requests.province,
-            city_regency: requests.city_regency,
-            sub_regency: requests.sub_regency,
-            address: requests.address,
-        }, {
-            where: {
-                id: id
+                return;
             }
-        })
+    
+            let requests = this.requestUpdateStudent(req.body, data);
+    
+            let result = await Student.update({
+                name: requests.name,
+                is_active: requests.is_active,
+                date_of_birth: requests.date_of_birth,
+                place_of_birth: requests.place_of_birth,
+                province: requests.province,
+                city_regency: requests.city_regency,
+                sub_regency: requests.sub_regency,
+                address: requests.address,
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
 
-        return result;
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    deleteDataStudent = async (req, res) => {
+        try {
+            let {status} = await this.checkExistanceData(req.params.id)
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found',
+                        data: null,
+                        error: null
+                    })
+
+                return;
+            }
+    
+            let result = await Student.destroy({where: {id: req.params.id}})
+    
+            res.status(200)            
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    changeStatusStudent = async (req, res) => {
+        try {
+            let {data, status} = await this.checkExistanceData(req.params.id)
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: null
+                    })
+    
+                return;
+            }
+    
+            let result = await Student.update({
+                is_active: (data.is_active == true) ? false : true
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+    
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    changePhotoStudent = async (req, res) => {
+        try {
+            let {status, data} = await this.checkExistanceData(req.params.id)
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found',
+                        data: null,
+                        error: null
+                    })
+
+                return;
+            }
+
+            if (data.photo != null) this.removeImage(data.photo)
+
+            let photoPath = (this.uploadPhoto(req.files)) ? this.uploadPhoto(req.files) : null;
+
+            let result = await Student.update({
+                photo: photoPath
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    removePhotoStudent = async (req, res) => {
+        try {
+            let {data, status} = await this.checkExistanceData(req.params.id)
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: null
+                    })
+
+                return;
+            }
+
+            if (data.photo != null) this.removeImage(data.photo)
+
+            let result = await Student.update({
+                photo: null
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
     }
 
     requestUpdateStudent = (request, dataStudent) => {
         let requests = {
-            name: (request.body.name) ? request.body.name : dataStudent.name,
-            is_active: (request.body.is_active) ? request.body.is_active : dataStudent.is_active,
-            date_of_birth: (request.body.date_of_birth) ? request.body.date_of_birth : dataStudent.date_of_birth,
-            place_of_birth: (request.body.place_of_birth) ? request.body.place_of_birth : dataStudent.place_of_birth,
-            province: (request.body.province) ? request.body.province : dataStudent.province,
-            city_regency: (request.body.city_regency) ? request.body.city_regency : dataStudent.city_regency,
-            sub_regency: (request.body.sub_regency) ? request.body.sub_regency : dataStudent.sub_regency,
-            address: (request.body.address) ? request.body.address : dataStudent.address,
+            name: (request.name) ? request.name : dataStudent.name,
+            is_active: (request.is_active) ? request.is_active : dataStudent.is_active,
+            date_of_birth: (request.date_of_birth) ? request.date_of_birth : dataStudent.date_of_birth,
+            place_of_birth: (request.place_of_birth) ? request.place_of_birth : dataStudent.place_of_birth,
+            province: (request.province) ? request.province : dataStudent.province,
+            city_regency: (request.city_regency) ? request.city_regency : dataStudent.city_regency,
+            sub_regency: (request.sub_regency) ? request.sub_regency : dataStudent.sub_regency,
+            address: (request.address) ? request.address : dataStudent.address,
         }
 
         return requests;
@@ -127,6 +340,14 @@ class StudentController {
         }
 
         return path;
+    }
+
+    removeImage = (filepath) => {
+        fs.unlink(`./public${filepath}`, (err) => {
+            if (err) {
+                console.info(err.message)
+            }
+        })
     }
 }
 
