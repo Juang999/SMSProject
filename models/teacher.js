@@ -38,7 +38,9 @@ module.exports = (sequelize, DataTypes) => {
     photo: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    entity_id: DataTypes.INTEGER,
+    detail_entity_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Teacher',
