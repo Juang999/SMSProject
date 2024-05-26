@@ -8,7 +8,7 @@ test('get data student', async () => {
 })
 
 test('test to create data student', async () => {
-    let result = await StudentController.inputDataStudent({
+    let result = await StudentController.store({
         body: {
             name: 'Alter Ego', 
             date_of_birth: '2003-10-10', 
@@ -16,7 +16,9 @@ test('test to create data student', async () => {
             province: 'Jawa Barat', 
             city_regency: 'Kabupaten Bogor', 
             sub_regency: 'Kecamatan Babakan Madang', 
-            address: '-', 
+            address: '-',
+            entity_id: 4,
+            detail_entity_id: 3
         }
     })
 
@@ -32,7 +34,7 @@ test('test activate student', async () => {
     expect(result).toEqual([1])
 })
 
-test.only('test remove photo', async () => {
+test('test remove photo', async () => {
     let result = await StudentController.removePhotoStudent(6)
     console.info(result)
 
@@ -71,7 +73,7 @@ describe("bulk test showDetailDataStudent", () => {
     })
 })
 
-describe('bulk test update data student', () => {
+describe.only('bulk test update data student', () => {
     test.skip(`test function updateDataTeacher while data doesn't exist`, async () => {
         let result = await StudentController.updateDataStudent({
             body: {
@@ -91,7 +93,7 @@ describe('bulk test update data student', () => {
     })
 
     test('test function updateDataTeacher while data exist', async () => {
-        let result = await StudentController.updateDataStudent({
+        let result = await StudentController.update({
             body: {
                 name: 'Gugun Gunawan',
                 is_active: false,
@@ -101,8 +103,10 @@ describe('bulk test update data student', () => {
                 city_regency: '',
                 sub_regency: '',
                 address: '',
+                entity_id: 6,
+                detail_entity_id: 7
             }
-        }, 1)
+        }, 7)
         console.info(result)
 
         expect(result).toEqual([1]);
