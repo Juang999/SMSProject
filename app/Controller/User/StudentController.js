@@ -75,7 +75,9 @@ class StudentController {
             city_regency: (req.body.city_regency) ? req.body.city_regency : null,
             sub_regency: (req.body.sub_regency) ? req.body.sub_regency : null,
             address: (req.body.address) ? req.body.address : null,
-            photo: photoPath
+            photo: '-',
+            entity_id: req.body.entity_id,
+            detail_entity_id: req.body.detail_entity_id
         })
         .then(result => {
             res.status(200)
@@ -121,6 +123,8 @@ class StudentController {
                 city_regency: requests.city_regency,
                 sub_regency: requests.sub_regency,
                 address: requests.address,
+                entity_id: requests.entity_id,
+                detail_entity_id: requests.detail_entity_id
             }, {
                 where: {
                     id: req.params.id
@@ -309,6 +313,8 @@ class StudentController {
             city_regency: (request.city_regency) ? request.city_regency : dataStudent.city_regency,
             sub_regency: (request.sub_regency) ? request.sub_regency : dataStudent.sub_regency,
             address: (request.address) ? request.address : dataStudent.address,
+            entity_id: (request.entity_id) ? request.entity_id : dataStudent.entity_id,
+            detail_entity_id: (request.detail_entity_id) ? request.detail_entity_id : dataStudent.detail_entity_id
         }
 
         return requests;

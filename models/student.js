@@ -28,7 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     city_regency: DataTypes.STRING,
     sub_regency: DataTypes.STRING,
     address: DataTypes.TEXT,
-    photo: DataTypes.STRING
+    photo: DataTypes.STRING,
+    entity_id: DataTypes.INTEGER,
+    detail_entity_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Student',

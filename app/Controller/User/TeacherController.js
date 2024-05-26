@@ -57,7 +57,9 @@ class TeacherController {
             email: (req.body.email) ? req.body.email : null,
             phone_number_1: (req.body.phone_number_1) ? req.body.phone_number_1 : null,
             phone_number_2: (req.body.phone_number_2) ? req.body.phone_number_2 : null,
-            photo: photoPath
+            photo: photoPath,
+            entity_id: req.body.entity_id,
+            detail_entity_id: req.body.detail_entity_id
         })
         .then(result => {
             res.status(200)
@@ -308,6 +310,8 @@ class TeacherController {
             phone_number_1: requests['phone_number_1'],
             phone_number_2: requests['phone_number_2'],
             photo: requests['photo'],
+            entity_id: requests['entity_id'],
+            detail_entity_id: requests['detail_entity_id']
         }, {
             where: {
                 id: id
@@ -334,9 +338,9 @@ class TeacherController {
             phone_number_1: (request.phone_number_1) ? request.phone_number_1 : dataTeacher.phone_number_1,
             phone_number_2: (request.phone_number_2) ? request.phone_number_2 : dataTeacher.phone_number_2,
             photo: (request.photo) ? request.photo : dataTeacher.photo,
+            entity_id: (request.entity_id) ? request.entity_id : dataTeacher.entity_id,
+            detail_entity_id: (request.detail_entity_id) ? request.detail_entity_id : dataTeacher.detail_entity_id
         }
-
-        console.info(requests['end_date'])
 
         return requests;
     }
