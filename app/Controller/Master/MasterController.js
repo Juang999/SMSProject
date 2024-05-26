@@ -163,18 +163,32 @@ class MasterController {
         })
     }
 
-    getDataWithSpesificField = async (field) => {
-        let dataMaster = await CodeMaster.findAll({
+    getLocation = (req, res) => {
+        CodeMaster.findAll({
             attributes: [
                 'id',
-                'code_name'
+                ['code_name', 'location']
             ],
             where: {
-                code_field: field
+                code_field: 'location'
             }
         })
-
-        return;
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
     }
 
     formCode = async (field) => {
