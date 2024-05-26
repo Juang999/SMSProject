@@ -14,6 +14,7 @@ const {
 /*
 *   router for code-master
 */
+router.get('/field', [Authorization], MasterController.getFieldCodeMaster);
 router.post('/input-code', [Authorization, SuperadminMiddleware], MasterController.inputDataMaster);
 
 /*
@@ -45,5 +46,9 @@ router.patch('/student/:id/remove-photo', [Authorization, SuperadminMiddleware],
 */
 router.get('/periode', [Authorization, SuperadminMiddleware], PeriodeController.index);
 router.post('/periode/create', [Authorization, SuperadminMiddleware], PeriodeController.store);
+router.get('/periode/:id/detail', [Authorization, SuperadminMiddleware], PeriodeController.show);
+router.put('/periode/:id/update', [Authorization, SuperadminMiddleware], PeriodeController.update);
+router.delete('/periode/:id/delete', [Authorization, SuperadminMiddleware], PeriodeController.delete);
+router.put('/periode/:id/update-detail', [Authorization, SuperadminMiddleware], PeriodeController.updateDetailPeriode);
 
 module.exports = router

@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         foreignKey: 'periode_id'
       })
+
+      DetailPeriode.belongsTo(models.CodeMaster, {
+        as: 'semester_code',
+        targetKey: 'id',
+        foreignKey: 'semester_id'
+      })
     }
   }
   DetailPeriode.init({
