@@ -312,6 +312,43 @@ class ClassController {
         })
     }
 
+    deleteHomeroomTeacher = async (req, res) => {
+        try {
+            let status = await this.checkExistanceHomeroomTeacher(req.params.id);
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+
+                return;
+            }
+    
+            let result = await HomeroomTeacher.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+    
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
     storeStudent = (req, res) => {
         StudentClass.create({
             class_id: req.body.class_id,
@@ -336,6 +373,47 @@ class ClassController {
         })
     }
 
+    deleteStudentClass = async (req, res) => {
+        try {
+            let status = await this.checkExistanceStudentClass(req.params.id);
+    
+            if (status == false) {
+                req.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+    
+                return;
+            }
+    
+            let result = await StudentClass.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+    
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    deleteStudent = (req, res) => {
+
+    }
+
     checkExistanceData = async (id) => {
         let result = await Class.findOne({
             where: {
@@ -347,6 +425,26 @@ class ClassController {
             status: (result != null) ? true : false,
             data: (result != null) ? result.dataValues : null
         };
+    }
+
+    checkExistanceHomeroomTeacher = async (id) => {
+        let result = await HomeroomTeacher.findOne({
+            where: {
+                id: id
+            }
+        })
+
+        return (result) ? true : false
+    }
+
+    checkExistanceStudentClass = async (id) => {
+        let result = await StudentClass.findOne({
+            where: {
+                id: id
+            }
+        })
+
+        return (result) ? true : false;
     }
 
     getClassCode = async (id, grade) => {

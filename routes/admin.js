@@ -63,5 +63,7 @@ router.put('/class/:id/update', [Authorization, SuperadminMiddleware], ClassCont
 router.delete('/class/:id/delete', [Authorization, SuperadminMiddleware], ClassController.delete);
 router.post('/class/student-class/create', [Authorization, SuperadminMiddleware], ClassController.storeStudent);
 router.post('/class/homeroom-teacher/create', [Authorization, SuperadminMiddleware], ClassController.storeHomeroomTeacher);
+router.delete('/class/student-class/:id/delete', [Authorization, SuperadminMiddleware], ClassController.deleteStudentClass);
+router.delete('/class/homeroom-teacher/:id/delete', [Authorization, SuperadminMiddleware], ClassController.deleteHomeroomTeacher);
 
 module.exports = router
