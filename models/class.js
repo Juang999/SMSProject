@@ -11,6 +11,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Class.belongsTo(models.CodeMaster, {
+        as: 'class_type',
+        targetKey: 'id',
+        foreignKey: 'type'
+      })
+
+      Class.belongsTo(models.Entity, {
+        as: 'entity',
+        targetKey: 'id',
+        foreignKey: 'entity_id'
+      })
+
+      Class.belongsTo(models.DetailEntity, {
+        as: 'detail_entity',
+        targetKey: 'id',
+        foreignKey: 'detail_entity_id'
+      })
+
+      Class.belongsTo(models.Periode, {
+        as: 'periode',
+        targetKey: 'id',
+        foreignKey: 'periode_id'
+      })
+
+      Class.hasMany(models.HomeroomTeacher, {
+        as: 'homeroom_teacher',
+        sourceKey: 'id',
+        foreignKey: 'class_id'
+      })
+
+      Class.hasMany(models.StudentClass, {
+        as: 'student_class',
+        sourceKey: 'id',
+        foreignKey: 'class_id'
+      })
     }
   }
   Class.init({
@@ -18,7 +53,10 @@ module.exports = (sequelize, DataTypes) => {
     class_code: DataTypes.STRING,
     type: DataTypes.INTEGER,
     grade: DataTypes.STRING,
-    is_active: DataTypes.BOOLEAN
+    is_active: DataTypes.BOOLEAN,
+    entity_id: DataTypes.INTEGER,
+    detail_entity_id: DataTypes.INTEGER,
+    periode_id: DataTypes.INTEGER
   }, {
     sequelize,
     schema: 'public',
