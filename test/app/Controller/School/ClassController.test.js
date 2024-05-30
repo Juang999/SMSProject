@@ -100,7 +100,7 @@ test('test delete ClassController', async () => {
     expect(callback).toHaveBeenCalledWith([1])
 })
 
-test.only('test show ClassController', async () => {
+test('test show ClassController', async () => {
     let result = await ClassController.show({
         params: {
             id: 3
@@ -152,4 +152,38 @@ test('test storeStudent ClassController', () => {
     console.info(callback.mock.calls[0][0])
 
     expect(callback.mock.calls[0][0]).toBeDefined();
+})
+
+test('test delete homeroomteacher ClassController', async () => {
+    let callback = jest.fn();
+
+    callback.mockImplementation(() => {
+        return 1;
+    })
+
+    await ClassController.deleteHomeroomTeacher({
+        params: {
+            id: 2
+        }
+    }, callback)
+
+    console.info(callback.mock.results[0].value)
+    expect(callback).toHaveBeenCalledWith(1)
+})
+
+test.only('test delete studentclass ClassController', async () => {
+    let callback = jest.fn();
+
+    callback.mockImplementation(() => {
+        return 1;
+    });
+
+    await ClassController.deleteStudentClass({
+        params: {
+            id: 7
+        }
+    }, callback)
+
+    console.info(callback.mock.results[0].value);
+    expect(callback).toHaveBeenCalledWith(1);
 })
