@@ -11,6 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      DetailEntity.belongsTo(models.Entity, {
+        as: 'entity',
+        targetKey: 'id',
+        foreignKey: 'entity_id'
+      })
+
+      DetailEntity.belongsTo(models.CodeMaster, {
+        as: 'location',
+        targetKey: 'id',
+        foreignKey: 'location_id'
+      })
     }
   }
   DetailEntity.init({
