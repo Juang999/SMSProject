@@ -19,7 +19,9 @@ module.exports = {
               schema: 'public',
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         }),
@@ -31,7 +33,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         })
@@ -46,5 +50,11 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
+    return queryInterface.sequelize.transaction(t => {
+      return Promise.all([
+        queryInterface.removeColumn('Students', 'entity_id', {transaction: t}),
+        queryInterface.removeColumn('Students', 'detail_entity_id', {transaction: t}),
+      ])
+    })
   }
 };

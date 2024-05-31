@@ -20,7 +20,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         }),
@@ -32,7 +34,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         })
