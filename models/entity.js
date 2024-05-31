@@ -20,9 +20,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Entity.init({
     entity_name: DataTypes.STRING,
-    is_active: DataTypes.BOOLEAN
+    is_active: DataTypes.BOOLEAN,
+    province: DataTypes.STRING,
+    city_regency: DataTypes.STRING,
+    sub_regency: DataTypes.STRING,
+    address: DataTypes.TEXT,
   }, {
     sequelize,
+    schema: 'public',
     modelName: 'Entity',
   });
   return Entity;
