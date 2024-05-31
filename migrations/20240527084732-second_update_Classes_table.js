@@ -20,7 +20,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         }),
@@ -32,7 +34,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         }),
@@ -44,7 +48,9 @@ module.exports = {
               schema: 'public'
             },
             key: 'id'
-          }
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }, {
           transaction: t
         })
@@ -63,9 +69,8 @@ module.exports = {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
         queryInterface.removeColumn('Classes', 'entity_id', {transaction: t}),
-        queryInterface.removeColumn('Classes', 'semester_id', {transaction: t}),
-        queryInterface.removeColumn('Classes', 'periode_id', {transaction: t}),
-        queryInterface.removeColumn('Classes', 'detail_periode_id', {transaction: t}),
+        queryInterface.removeColumn('Classes', 'detail_entity_id', {transaction: t}),
+        queryInterface.removeColumn('Classes', 'periode_id', {transaction: t})
       ]);
     });
   }

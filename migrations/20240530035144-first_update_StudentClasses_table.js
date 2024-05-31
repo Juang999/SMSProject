@@ -19,7 +19,7 @@ module.exports = {
               tableName: 'CodeMasters',
               schema: 'public'
             },
-            key: 'id'
+            key: 'id',
           }
         }, {
           transaction: t

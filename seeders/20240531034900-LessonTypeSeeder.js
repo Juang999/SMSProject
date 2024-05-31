@@ -1,4 +1,5 @@
 'use strict';
+
 const moment = require('moment');
 
 /** @type {import('sequelize-cli').Migration} */
@@ -13,18 +14,23 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
-    return queryInterface.bulkInsert('Classes', [
+    return queryInterface.bulkInsert('CodeMasters', [
       {
-        class_code: '1B',
-        type: 3,
-        grade: 'B',
-        is_active: true,
+        code_code: 'LESSON-TYPE1',
+        code_field: 'lesson-type',
+        code_name: 'Wajib',
+        code_description: 'matapelajaran wajib diikuti',
+        code_is_active: true,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        class_code_master_id: 6,
-        entity_id: 8,
-        periode_id: 38,
+      }, {
+        code_code: 'LESSON-TYPE2',
+        code_field: 'lesson-type',
+        code_name: 'Ekstrakulikuler',
+        code_description: 'matapelajaran tidak wajib diikuti',
+        code_is_active: true,
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }
     ])
   },
@@ -36,5 +42,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+    return queryInterface.bulkDelete('CodeMasters', {code_field: 'lesson-type'}, {})
   }
 };

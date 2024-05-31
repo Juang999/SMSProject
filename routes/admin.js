@@ -3,6 +3,7 @@ const router = Router()
 const {
     ClassController,
     MasterController,
+    EntityController,
     TeacherController,
     StudentController,
     PeriodeController,
@@ -53,9 +54,20 @@ router.delete('/periode/:id/delete', [Authorization, SuperadminMiddleware], Peri
 router.put('/periode/:id/update-detail', [Authorization, SuperadminMiddleware], PeriodeController.updateDetailPeriode);
 
 /**
+ *  router for entity feature
+*/
+router.get('/entity', [Authorization, SuperadminMiddleware], EntityController.index);
+router.post('/entity/create', [Authorization, SuperadminMiddleware], EntityController.store);
+router.get('/entity/:id/detail', [Authorization, SuperadminMiddleware], EntityController.show);
+router.put('/entity/:id/update', [Authorization, SuperadminMiddleware], EntityController.update);
+router.patch('/entity/:id/activate', [Authorization, SuperadminMiddleware], EntityController.activate);
+router.post('/entity/detail-entity/create', [Authorization, SuperadminMiddleware], EntityController.storeDetailEntity);
+router.delete('/entity/detail-entity/:id/delete', [Authorization, SuperadminMiddleware], EntityController.deleteDetailEntity);
+router.patch('/entity/detail-entity/:id/activate', [Authorization, SuperadminMiddleware], EntityController.activateDetailEntity);
+
+/**
 *   router for class feature
 */
-
 router.get('/class', [Authorization, SuperadminMiddleware], ClassController.index);
 router.post('/class/create', [Authorization, SuperadminMiddleware], ClassController.store);
 router.get('/class/:id/detail', [Authorization, SuperadminMiddleware], ClassController.show);

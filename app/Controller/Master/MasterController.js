@@ -247,6 +247,34 @@ class MasterController {
         })
     }
 
+    getLessonType = (req, res) => {
+        CodeMaster.findAll({
+            attributes: [
+                'id',
+                ['code_name', 'lesson_type']
+            ],
+            where: {
+                code_field: 'lesson-type'
+            }
+        })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
+    }
+
     formCode = async (field) => {
         let totalData = await CodeMaster.count({where: {code_field: field}})
 

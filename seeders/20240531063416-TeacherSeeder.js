@@ -15,54 +15,51 @@ module.exports = {
      * }], {});
     */
 
-    return queryInterface.bulkInsert('Students', [
+    return queryInterface.bulkInsert('Teachers', [
       {
-        name: 'Andreas',
-        nis: '-',
+        fullname: 'Bangkit Juang Raharjo',
+        start_date: '2024-08-01',
         is_active: true,
-        place_of_birth: 'Bandung',
         province: 'Jawa Barat',
-        city_regency: 'Bandung',
-        sub_regency: 'Bandung',
-        address: 'Jalan Raya Bandung',
-        photo: null,
+        regency: 'Kabupaten Bogor',
+        sub_regency: 'Babakan Madang',
+        address: 'Sentul City',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        date_of_birth: '2010-07-01',
+        email: 'bangkitjuangraharjo@gmail.com',
+        phone_number_1: '081325507780',
         entity_id: 8,
         detail_entity_id: 13,
       }, {
-        name: 'Bakti',
-        nis: '-',
+        fullname: 'Zulda Zakaria Badrudin',
+        start_date: '2024-08-01',
         is_active: true,
-        place_of_birth: 'Bojong Soang',
         province: 'Jawa Barat',
-        city_regency: 'Kabupaten Bogor',
-        sub_regency: 'Jonggol',
-        address: 'Jonggol Ujung Bogor',
-        photo: null,
+        regency: 'Kabupaten Bandung Barat',
+        sub_regency: 'Padalarang',
+        address: 'Permatasari',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        date_of_birth: '2010-07-02',
+        email: 'zuldabadrudin@gmail.com',
+        phone_number_1: '62812357123',
         entity_id: 8,
-        detail_entity_id: 14,
+        detail_entity_id: 13,
       }, {
-        name: 'Farhat Abbas',
-        nis: '-',
+        fullname: 'Raditya Cahyadi Nugraha',
+        start_date: '2024-08-01',
         is_active: true,
-        place_of_birth: 'Bojong Soang',
         province: 'Jawa Barat',
-        city_regency: 'Bogor',
-        sub_regency: 'Bogor',
-        address: 'Kota Bogor',
-        photo: null,
+        regency: 'Kota Bandung',
+        sub_regency: 'Bojong Loak Kidul',
+        address: 'Kampung',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        date_of_birth: '2010-07-02',
+        email: 'radityacahyadit3@gmail.com',
+        phone_number_1: '628796125512',
         entity_id: 8,
         detail_entity_id: 13,
       }
-    ])
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
@@ -72,5 +69,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+    return queryInterface.bulkDelete('Teachers', {fullname: 'Bangkit Juang Raharjo'}, {});
   }
 };

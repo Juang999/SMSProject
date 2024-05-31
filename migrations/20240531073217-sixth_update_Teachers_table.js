@@ -11,12 +11,12 @@ module.exports = {
      */
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.addColumn('Students', 'entity_id', {
+        queryInterface.changeColumn('Teachers', 'entity_id', {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
               tableName: 'Entities',
-              schema: 'public',
+              schema: 'public'
             },
             key: 'id'
           },
@@ -25,7 +25,7 @@ module.exports = {
         }, {
           transaction: t
         }),
-        queryInterface.addColumn('Students', 'detail_entity_id', {
+        queryInterface.changeColumn('Teachers', 'detail_entity_id', {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
@@ -39,8 +39,8 @@ module.exports = {
         }, {
           transaction: t
         })
-      ]);
-    });
+      ])
+    })
   },
 
   async down (queryInterface, Sequelize) {
@@ -50,11 +50,5 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    return queryInterface.sequelize.transaction(t => {
-      return Promise.all([
-        queryInterface.removeColumn('Students', 'entity_id', {transaction: t}),
-        queryInterface.removeColumn('Students', 'detail_entity_id', {transaction: t}),
-      ])
-    })
   }
 };
