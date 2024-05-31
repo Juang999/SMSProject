@@ -15,13 +15,13 @@ module.exports = {
     */
     return queryInterface.bulkInsert('DetailEntities', [
       {
-        entity_id: 4,
+        entity_id: 8,
         location_id: 19,
         is_active: true,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        entity_id: 4,
+        entity_id: 8,
         location_id: 20,
         is_active: true,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),

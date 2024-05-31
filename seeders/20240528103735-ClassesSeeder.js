@@ -23,11 +23,8 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         class_code_master_id: 6,
-        entity_id: 4,
-        detail_entity_id: 3,
+        entity_id: 8,
         periode_id: 38,
-        homeroom_teacher_1: 21,
-        homeroom_teacher_2: 7,
       }
     ])
   },
