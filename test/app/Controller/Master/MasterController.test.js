@@ -1,4 +1,5 @@
-const {MasterController} = require('../../../../app/Controller/Controller')
+const {MasterController} = require('../../../../app/Controller/Controller');
+const {CodeMaster} = require('../../../../models');
 
 let bulkData = [
     {
@@ -32,9 +33,42 @@ test('test to get field code master', async () => {
     expect(dataField).toBeDefined()
 })
 
-test.only.each(dataCodeField)('test to get data code master by code_field', async ({field}) => {
+test.each(dataCodeField)('test to get data code master by code_field', async ({field}) => {
     let data = await MasterController.getData(field)
     console.info(data)
 
     expect(data).toBeDefined();
+})
+
+test('test updateData MasterController', async () => {
+    let updateMock = jest.spyOn(CodeMaster, 'update');
+
+    let request = {
+        code_field: 'lesson-type',
+        code_name: 'ekstra kulikuler',
+        code_description: 'tipe pelajaran',
+        code_is_active: true,
+    };
+
+    await MasterController.updateData({
+        body: request,
+        params: {
+            id: 31
+        }
+    })
+
+    console.info(updateMock.mock.results[0])
+    expect(CodeMaster.update).toHaveBeenCalled();
+});
+
+test.only('test delete MasterController', async () => {
+    let deleteMock = jest.spyOn(CodeMaster, 'destroy');
+
+    await MasterController.delete({
+        params: {
+            id: 46
+        }
+    })
+
+    expect(CodeMaster.destroy).toHaveBeenCalled();
 })
