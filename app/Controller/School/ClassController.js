@@ -8,42 +8,55 @@ const {
 } = require('../../../models');
 
 class ClassController {
-    index = (req, res) => {
-        Class.findAll({
-            attributes: [
-                'id',
-                'class_code',
-                'is_active',
-                [Sequelize.literal('"class_type"."code_name"'), 'type'],
-                [Sequelize.literal(`"detail_entity->location"."code_name"`), 'location']
-            ],
-            include: [
-                {
-                    model: CodeMaster,
-                    as: 'class_type',
-                    attributes: []
-                }, {
-                    model: DetailEntity,
-                    as: 'detail_entity',
-                    attributes: [],
-                    include: [
-                        {
-                            model: CodeMaster,
-                            as: 'location',
-                            attributes: []
-                        }
-                    ]
+    index = async (req, res) => {
+        try {
+            let periodeId = (req.query.periode_id) ? req.query.periode_id : await this.getPeriodeId(); 
+
+            let result = await Class.findAll({
+                attributes: [
+                    'id',
+                    'class_code',
+                    'is_active',
+                    [Sequelize.literal('"class_type"."code_name"'), 'type'],
+                    [Sequelize.literal(`"detail_entity->location"."code_name"`), 'location']
+                ],
+                include: [
+                    {
+                        model: CodeMaster,
+                        as: 'class_type',
+                        attributes: []
+                    }, {
+                        model: DetailEntity,
+                        as: 'detail_entity',
+                        attributes: [],
+                        include: [
+                            {
+                                model: CodeMaster,
+                                as: 'location',
+                                attributes: []
+                            }
+                        ]
+                    }
+                ],
+                where: {
+                    periode_id: periodeId
                 }
-            ]
-        })
-        .then(result => {
+            })
+
             res.status(200)
                 .json({
                     status: 'success',
                     data: result,
                     error: null
                 })
-        })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
     }
 
     show = async (req, res) => {
@@ -410,10 +423,6 @@ class ClassController {
         }
     }
 
-    deleteStudent = (req, res) => {
-
-    }
-
     checkExistanceData = async (id) => {
         let result = await Class.findOne({
             where: {
@@ -473,6 +482,19 @@ class ClassController {
             class_code_master_id: (request.class_code_master_id) ? request.class_code_master_id : dataClass.class_code_master_id,
             class_code: (request.class_code_master_id) ? await this.getClassCode(request.class_code_master_id, grade) : dataClass.class_code,
         }
+    }
+
+    getPeriodeId = async () => {
+        let {id} = await Periode.findOne({
+            attributes: [
+                'id'
+            ],
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        });
+
+        return id;
     }
 }
 
