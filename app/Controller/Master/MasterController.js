@@ -1,7 +1,7 @@
 const {CodeMaster, Sequelize} = require('../../../models')
 
 class MasterController {
-    inputDataMaster = async (req, res) => {
+    store = async (req, res) => {
         try {
             let dataCodeMaster = await CodeMaster.create({
                 code_field: req.body.code_field,
@@ -27,10 +27,13 @@ class MasterController {
         }
     }
 
-    getFieldCodeMaster = () => {
+    getFieldCodeMaster = (req, res) => {
         CodeMaster.findAll({
             attributes: [
                 [Sequelize.literal('DISTINCT(code_field)'), 'code_field']
+            ],
+            order: [
+                ['code_field', 'ASC']
             ]
         })
         .then(result => {
@@ -49,6 +52,111 @@ class MasterController {
                     error: err.message
                 })
         })
+    }
+
+    update = async (req, res) => {
+        try {
+            let {status, data} = await this.checkExistanceData(req.params.id);
+    
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    });
+
+                return;
+            }
+
+            let {code_code, code_field, code_name, code_description, code_is_active} = this.requestUpdate(req.body, data);
+
+            let result = await CodeMaster.update({
+                code_code,
+                code_field,
+                code_name,
+                code_description,
+                code_is_active,
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: error.message
+                })
+        }
+    }
+
+    delete = async (req, res) => {
+        try {
+            let {status} = await this.checkExistanceData(req.params.id)
+
+            if (status == false) {
+                res.status(404)
+                    .json({
+                        status: 'not found!',
+                        data: null,
+                        error: 'not found!'
+                    })
+    
+                return;
+            }
+    
+            let result = await CodeMaster.destroy({
+                where: {
+                    id: req.params.id
+                }
+            });
+    
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        } catch (error) {
+            res.status(400)
+            .json({
+                status: 'failed',
+                data: null,
+                error: error.message
+            })
+        }
+    }
+
+    requestUpdate = (request, dataCodeMaster) => {
+        return {
+            code_code: (request.code_code) ? request.code_code : dataCodeMaster.code_code,
+            code_field: (request.code_field) ? request.code_field : dataCodeMaster.code_field,
+            code_name: (request.code_name) ? request.code_name : dataCodeMaster.code_name,
+            code_description: (request.code_description) ? request.code_description : dataCodeMaster.code_description,
+            code_is_active: (request.code_is_active) ? request.code_is_active : dataCodeMaster.code_is_active,
+        }
+    }
+
+    checkExistanceData = async (id) => {
+        let result = await CodeMaster.findOne({
+            where: {
+                id: id
+            }
+        })
+
+        return {
+            status: (result) ? true : false,
+            data: (result) ? result.dataValues : null
+        }
     }
 
     getDataClassType = (req, res) => {
@@ -219,14 +327,14 @@ class MasterController {
         })
     }
 
-    getTeacherStatus = (req, res) => {
+    getStatus = (req, res) => {
         CodeMaster.findAll({
             attributes: [
                 'id',
-                ['code_name', 'teacher_status']
+                ['code_name', 'status']
             ],
             where: {
-                code_field: 'teacher-status'
+                code_field: 'status'
             }
         })
         .then(result => {

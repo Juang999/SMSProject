@@ -257,6 +257,34 @@ class PeriodeController {
         }
     }
 
+    periodeList = (req, res) => {
+        Periode.findAll({
+            attributes: [
+                'id',
+                [Sequelize.literal(`CONCAT(start_year, ' - ', end_year)`), 'periode']
+            ],
+            order: [
+                ['start_year', 'ASC']
+            ]
+        })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(err => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: err.message
+                })
+        })
+    }
+
     requestsUpdatePeriode = (request, dataPeriode) => {
         let startYear = (request.start_year) ? request.start_year : dataPeriode.start_year;
         let endYear = (request.end_year) ?  request.end_year : dataPeriode.end_year;

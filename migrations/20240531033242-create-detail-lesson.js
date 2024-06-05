@@ -81,18 +81,6 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      teacher_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Teachers',
-            schema: 'public'
-          },
-          key: 'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

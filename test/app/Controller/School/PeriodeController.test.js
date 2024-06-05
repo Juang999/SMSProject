@@ -1,6 +1,9 @@
 const {
     PeriodeController
 } = require('../../../../app/Controller/Controller')
+const {
+    Periode
+} = require('../../../../models');
 
 let rangeYear = [
     {
@@ -178,7 +181,7 @@ test('test to update detail periode', async () => {
     expect(result).toEqual([1])
 })
 
-test.only('test to delete periode', async () => {
+test('test to delete periode', async () => {
     let result = await PeriodeController.delete({
         params: {
             id: 41
@@ -188,3 +191,12 @@ test.only('test to delete periode', async () => {
 
     expect(result).toBeTruthy();
 })
+
+it.only('test listPierode PeriodeController', async () => {
+    let findAllMock = jest.spyOn(Periode, 'findAll');
+
+    await PeriodeController.periodeList();
+
+    // console.info(findAllMock.mock.results[0].value.Promise)
+    expect(Periode.findAll).toHaveBeenCalled();
+});
