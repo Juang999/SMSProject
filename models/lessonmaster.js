@@ -11,13 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      LessonMaster.hasMany(models.DetailLesson, {
+        as: 'detail_lesson',
+        sourceKey: 'id',
+        foreignKey: 'lesson_id'
+      })
     }
   }
   LessonMaster.init({
     nama_pelajaran: DataTypes.STRING,
-    tipe_pelajaran: DataTypes.INTEGER
+    tipe_pelajaran: DataTypes.INTEGER,
+    description: DataTypes.TEXT
   }, {
     sequelize,
+    schema: 'public',
     modelName: 'LessonMaster',
   });
   return LessonMaster;
