@@ -1,5 +1,6 @@
 const AuthController = require('./User/AuthController');
 const ClassController = require('./School/ClassController');
+const LessonController = require('./School/LessonController');
 const TeacherController = require('./User/TeacherController');
 const StudentController = require('./User/StudentController');
 const MasterController = require('./Master/MasterController');
@@ -11,6 +12,7 @@ class Controller {
         return {
             AuthController: AuthController,
             ClassController: ClassController,
+            LessonController: LessonController,
             MasterController: MasterController,
             EntityController: EntityController,
             TeacherController: TeacherController,
