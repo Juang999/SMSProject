@@ -21,6 +21,17 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     schema: 'public',
     modelName: 'CityRegency',
+    hooks: {
+      afterCreate: ({dataValues}) => {
+        Logging.info({message: 'created', ut_tablename: 'CityRegencies', ut_data: dataValues, ut_error: null});
+      },
+      afterUpdate: ({dataValues}) => {
+        Logging.info({message: 'updated', ut_tablename: 'CityRegencies', ut_data: dataValues, ut_error: null});
+      },
+      afterDestroy: ({dataValues}) => {
+        Logging.info({message: 'deleted', ut_tablename: 'CityRegencies', ut_data: dataValues, ut_error: null});
+      }
+    }
   });
   return CityRegency;
 };

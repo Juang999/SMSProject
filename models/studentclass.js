@@ -24,6 +24,17 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'StudentClass',
+    hooks: {
+      afterCreate: ({dataValues}) => {
+        Logging.info({message: 'created', ut_tablename: 'StudentClasses', ut_data: dataValues, ut_error: null});
+      },
+      afterUpdate: ({dataValues}) => {
+        Logging.info({message: 'updated', ut_tablename: 'StudentClasses', ut_data: dataValues, ut_error: null});
+      },
+      afterDestroy: ({dataValues}) => {
+        Logging.info({message: 'deleted', ut_tablename: 'StudentClasses', ut_data: dataValues, ut_error: null});
+      }
+    }
   });
   return StudentClass;
 };

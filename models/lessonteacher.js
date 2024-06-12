@@ -1,7 +1,13 @@
 'use strict';
 const {
-  Model
+  Model,
+  Sequelize
 } = require('sequelize');
+const {
+  get
+} = require('express-http-context');
+const Logging = require('../helper/Logging.js');
+
 module.exports = (sequelize, DataTypes) => {
   class LessonTeacher extends Model {
     /**
@@ -23,6 +29,17 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     schema: 'public',
     modelName: 'LessonTeacher',
+    hooks: {
+      afterCreate: ({dataValues}) => {
+        Logging.info({message: 'created', ut_tablename: 'LessonTeachers', ut_data: dataValues, ut_error: null});
+      },
+      afterUpdate: ({dataValues}) => {
+        Logging.info({message: 'updated', ut_tablename: 'LessonTeachers', ut_data: dataValues, ut_error: null});
+      },
+      afterDestroy: ({dataValues}) => {
+        Logging.info({message: 'deleted', ut_tablename: 'LessonTeachers', ut_data: dataValues, ut_error: null});
+      }
+    }
   });
   return LessonTeacher;
 };

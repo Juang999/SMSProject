@@ -33,7 +33,18 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-    schema: 'public'
+    schema: 'public',
+    hooks: {
+      afterCreate: ({dataValues}) => {
+        Logging.info({message: 'created', ut_tablename: 'Users', ut_data: dataValues, ut_error: null});
+      },
+      afterUpdate: ({dataValues}) => {
+        Logging.info({message: 'updated', ut_tablename: 'Users', ut_data: dataValues, ut_error: null});
+      },
+      afterDestroy: ({dataValues}) => {
+        Logging.info({message: 'deleted', ut_tablename: 'Users', ut_data: dataValues, ut_error: null});
+      }
+    }
   });
   return User;
 };
