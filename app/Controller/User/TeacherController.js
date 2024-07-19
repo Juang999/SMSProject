@@ -1,8 +1,11 @@
 const {
     Teacher
-} = require('../../../models')
-const {Op} = require('sequelize')
-const fs = require('fs')
+} = require('../../../models');
+const {Op} = require('sequelize');
+const fs = require('fs');
+const {
+    Logging
+} = require('../../../helper/helper.js');
 
 class TeacherController {
     index = (req, res) => {
@@ -32,13 +35,15 @@ class TeacherController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -69,13 +74,15 @@ class TeacherController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -100,13 +107,15 @@ class TeacherController {
                     data: data,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -131,13 +140,15 @@ class TeacherController {
                     data: resultUpdateTeacher,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -161,13 +172,15 @@ class TeacherController {
                     data: dataTeacher,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -192,21 +205,23 @@ class TeacherController {
                 where: {
                     id: req.params.id
                 }
-            })
+            });
 
             res.status(200)
                 .json({
                     status: 'success',
                     data: result,
                     error: null
-                })
-        } catch (error) {
+                });
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
-                })
+                    error: message
+                });
+
+            Logging.error({message, stack});
         }
     }
 
@@ -243,13 +258,15 @@ class TeacherController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -284,13 +301,15 @@ class TeacherController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -321,9 +340,9 @@ class TeacherController {
         return RESULT_UPDATE_DATE;
     }
 
-    /*
-    *   create requests 
-    */
+    /**
+     * create requests
+     */
     requestUpdateData = async (request, dataTeacher) => {
         let requests = {
             fullname: (request.fullname) ? request.fullname : dataTeacher.fullname,
@@ -345,13 +364,13 @@ class TeacherController {
         return requests;
     }
 
-    /*
-    *   bellow function is to find the data
-    *   when the data doesn't exist it will
-    *   return 404 not found and it will
-    *   return the data & status while
-    *   exist
-    */
+    /**
+     * bellow function is to find the data
+     * when the data doesn't exist it will
+     * return 404 not found and it will
+     * return the data & status while
+     * exist
+     */
     checkDataTeacher = async (id) => {
         let dataTeacher = await Teacher.findByPk(id);
 
