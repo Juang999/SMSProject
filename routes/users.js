@@ -9,5 +9,8 @@ router.get('/', function(req, res, next) {
 
 /* POST login user. */
 router.post('/login', AuthController.login);
+router.get('/index', (req, res) => {
+  res.render('helloworld');
+})
 
 module.exports = router;
