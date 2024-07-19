@@ -1,6 +1,11 @@
+require('dotenv').config();
+
 const {User, UserHasRole, Role, Sequelize} = require('../models')
 const {compare, compareSync} = require('bcrypt')
 const Bcrypt = require('./Bcrypt');
+const {get} = require('express-http-context');
+const jwt = require('jsonwebtoken');
+const {ACCESS_TOKEN_SECRET} = process.env;
 
 class Auth {
     attempt = async (request) => {
@@ -59,6 +64,18 @@ class Auth {
             role_id: Bcrypt.AESEncrypt(dataUser.dataValues.role_id),
             role_name: dataUser.dataValues.role_name,
         } : null;
+    }
+
+    user = async () => {
+        const {id} = jwt.verify(get('token'), ACCESS_TOKEN_SECRET);
+
+        let {dataValues} = await User.findOne({
+            where: {
+                id: Bcrypt.AESDecrypt(id)
+            }
+        });
+
+        return dataValues;
     }
 }
 

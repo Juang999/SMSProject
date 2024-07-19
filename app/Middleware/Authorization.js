@@ -2,8 +2,9 @@ require('dotenv').config()
 
 const jwt = require('jsonwebtoken')
 const {ACCESS_TOKEN_SECRET} = process.env
-const {Auth, Bcrypt} = require('../../helper/helper.js')
+const {Auth, Bcrypt} = require('../../helper/Helper.js')
 const {User} = require('../../models')
+const {set} = require('express-http-context');
 
 let checkUserById = async (id) => {
     let decryptedId = Bcrypt.AESDecrypt(id);
@@ -13,6 +14,8 @@ let checkUserById = async (id) => {
             id: decryptedId
         }
     })
+
+    set('header_data', dataUser.dataValues.id);
 
     return (dataUser) ? true : false;
 }
