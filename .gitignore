@@ -2,3 +2,7 @@ node_modules
 .env
 public/images/
 log
+.env.configuration
+.env.development
+.env.test
+.env.production
