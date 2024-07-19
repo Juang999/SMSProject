@@ -6,6 +6,9 @@ const {
 } = require('../../../models')
 const moment = require('moment')
 const { where } = require('sequelize')
+const {
+    Logging
+} = require('../../../helper/helper.js');
 
 class PeriodeController {
     index = async (req, res) => {
@@ -28,13 +31,15 @@ class PeriodeController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -91,13 +96,15 @@ class PeriodeController {
                     data: detailPeriode,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -126,13 +133,15 @@ class PeriodeController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -160,7 +169,8 @@ class PeriodeController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                inidividualHooks: true,
             })
     
             res.status(200)
@@ -169,13 +179,15 @@ class PeriodeController {
                     data: result,
                     error: null
                 })    
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -207,13 +219,15 @@ class PeriodeController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -238,7 +252,8 @@ class PeriodeController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                inidividualHooks: true
             })
 
             res.status(200)
@@ -247,13 +262,15 @@ class PeriodeController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -275,13 +292,15 @@ class PeriodeController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -340,7 +359,8 @@ class PeriodeController {
             where: {
                 id: id
             },
-            force: true
+            force: true,
+            inidividualHooks: true
         }, {
             transaction: transaction
         })
@@ -353,7 +373,8 @@ class PeriodeController {
             where: {
                 periode_id: id
             },
-            force: true
+            force: true,
+            inidividualHooks: true,
         }, {
             transaction: transaction
         })

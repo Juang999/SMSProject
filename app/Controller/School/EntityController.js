@@ -4,6 +4,9 @@ const {
     DetailEntity,
     Sequelize,sequelize,
 } = require('../../../models')
+const {
+    Logging
+} = require('../../../helper/helper.js');
 
 class EntityController {
     index = (req, res) => {
@@ -16,13 +19,15 @@ class EntityController {
                         error: null
                     })
             })
-            .catch(err => {
+            .catch(({message, stack}) => {
                 res.status(400)
                     .json({
                         status: 'failed',
                         data: null,
                         error: err.message
                     })
+
+                Logging.error({message, stack});
             })
     }
 
@@ -78,13 +83,15 @@ class EntityController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -105,13 +112,15 @@ class EntityController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -142,22 +151,25 @@ class EntityController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             res.status(200)
                 .json({
                     status: 'success',
-                    data: result,
+                    data: result[1],
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
                     error: error.message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -181,13 +193,14 @@ class EntityController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             res.status(200)
                 .json({
                     status: 'success',
-                    data: result,
+                    data: result[1],
                     error: null
                 })
         } catch (error) {
@@ -214,13 +227,15 @@ class EntityController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -244,7 +259,8 @@ class EntityController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             res.status(200)
@@ -253,13 +269,15 @@ class EntityController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -290,13 +308,15 @@ class EntityController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 

@@ -6,6 +6,9 @@ const {
     Sequelize, CodeMaster,
     LessonMaster, DetailLesson,
 } = require('../../../models');
+const {
+    Logging
+} = require('../../../helper/helper.js');
 
 class LessonController {
     index = (req, res) => { 
@@ -23,13 +26,15 @@ class LessonController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -122,13 +127,15 @@ class LessonController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -146,13 +153,15 @@ class LessonController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -174,29 +183,32 @@ class LessonController {
             let {nama_pelajaran, tipe_pelajaran, description, is_active} = this.requestsUpdate(req.body, data);
 
             let result = await LessonMaster.update({
-                nama_pelajaran, 
-                tipe_pelajaran, 
-                description, 
-                is_active
+                nama_pelajaran: nama_pelajaran, 
+                tipe_pelajaran: tipe_pelajaran, 
+                description: description, 
+                is_active: is_active
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             res.status(200)
                 .json({
                     status: 'success',
-                    data: result,
+                    data: result[1],
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({error: message, path: stack});
         }
     }
 
@@ -218,7 +230,8 @@ class LessonController {
             let result = await LessonMaster.destroy({
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             });
 
             res.status(200)
@@ -227,13 +240,15 @@ class LessonController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -256,13 +271,15 @@ class LessonController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -293,22 +310,25 @@ class LessonController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             });
 
             res.status(200)
                 .json({
                     status: 'success',
-                    data: result,
+                    data: result[1],
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -330,7 +350,8 @@ class LessonController {
             let result = await DetailLesson.destroy({
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             res.status(200)
@@ -339,13 +360,15 @@ class LessonController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -364,13 +387,15 @@ class LessonController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         })
     }
 
@@ -392,7 +417,8 @@ class LessonController {
             let result = await LessonTeacher.destroy({
                 where: {
                     id: req.params.id
-                }
+                },
+                individualHooks: true
             })
 
             
@@ -402,13 +428,15 @@ class LessonController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 

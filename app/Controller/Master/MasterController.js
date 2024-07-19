@@ -1,4 +1,7 @@
 const {CodeMaster, Sequelize} = require('../../../models')
+const {
+    Logging
+} = require('../../../helper/helper.js');
 
 class MasterController {
     store = async (req, res) => {
@@ -17,13 +20,15 @@ class MasterController {
                     data: dataCodeMaster,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -44,13 +49,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -89,13 +96,15 @@ class MasterController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: error.message
+                    error: message
                 })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -126,13 +135,15 @@ class MasterController {
                     data: result,
                     error: null
                 })
-        } catch (error) {
+        } catch ({message, stack}) {
             res.status(400)
             .json({
                 status: 'failed',
                 data: null,
                 error: error.message
             })
+
+            Logging.error({message, stack});
         }
     }
 
@@ -177,13 +188,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -197,22 +210,24 @@ class MasterController {
                 code_field: 'class-name'
             }
         })
-            .then(result => {
-                res.status(200)
-                    .json({
-                        status: 'success',
-                        data: result,
-                        error: null
-                    })
-            })
-            .catch(err => {
-                res.status(400)
-                    .json({
-                        status: 'failed',
-                        data: null,
-                        error: err.message
-                    })
-            })
+        .then(result => {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: result,
+                    error: null
+                })
+        })
+        .catch(({message, stack}) => {
+            res.status(400)
+                .json({
+                    status: 'failed',
+                    data: null,
+                    error: message
+                })
+
+            Logging.error({message, stack})
+        })
     }
 
     getClassGrade = (req, res) => {
@@ -233,13 +248,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -261,13 +278,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -289,13 +308,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -317,13 +338,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -345,13 +368,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
@@ -373,13 +398,15 @@ class MasterController {
                     error: null
                 })
         })
-        .catch(err => {
+        .catch(({message, stack}) => {
             res.status(400)
                 .json({
                     status: 'failed',
                     data: null,
-                    error: err.message
+                    error: message
                 })
+
+            Logging.error({message, stack})
         })
     }
 
