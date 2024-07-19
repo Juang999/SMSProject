@@ -1,4 +1,4 @@
-const {sequelize} = require('../models')
+const {sequelize, Teacher} = require('../models')
 const {Sequelize} = require('sequelize')
 
 test ('test connection into database', async () => {
@@ -17,3 +17,9 @@ test ('test connection into database', async () => {
 
     expect(message).toBe('database connected!')
 })
+
+test.only('test environment', async () => {
+    let data = await Teacher.findAll();
+
+    console.info(data);
+});
