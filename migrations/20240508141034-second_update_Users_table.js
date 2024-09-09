@@ -12,26 +12,24 @@ module.exports = {
 
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.addColumn('Users', 'teacher_id', {
+        queryInterface.changeColumn('Users', 'teacher_id', {
           type: Sequelize.DataTypes.INTEGER,
           unique: true,
           references: {
             model: {
-              tableName: 'Teachers',
-              schema: 'public'
+              tableName: 'Teachers'
             },
             key: 'id',
           }
         }, {
           transaction: t
         }),
-        queryInterface.addColumn('Users', 'student_id', {
+        queryInterface.changeColumn('Users', 'student_id', {
           type: Sequelize.DataTypes.INTEGER,
           unique: true,
           references: {
             model: {
-              tableName: 'Students',
-              schema: 'public'
+              tableName: 'Students'
             },
             key: 'id',
           }

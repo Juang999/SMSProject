@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Periode',
-    schema: 'public',
     paranoid: true,
     hooks: {
       afterCreate: ({dataValues}) => {

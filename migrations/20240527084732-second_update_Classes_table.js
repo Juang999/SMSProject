@@ -16,8 +16,7 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
-              tableName: 'Entities',
-              schema: 'public'
+              tableName: 'Entities'
             },
             key: 'id'
           },
@@ -30,8 +29,7 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
-              tableName: 'DetailEntities',
-              schema: 'public'
+              tableName: 'DetailEntities'
             },
             key: 'id'
           },
@@ -44,8 +42,7 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
-              tableName: 'Periodes',
-              schema: 'public'
+              tableName: 'Periodes'
             },
             key: 'id'
           },

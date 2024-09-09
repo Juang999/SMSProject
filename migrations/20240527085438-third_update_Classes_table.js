@@ -17,7 +17,6 @@ module.exports = {
           references: {
             model: {
               tableName: 'Teachers',
-              schema: 'public'
             },
             key: 'id'
           },
@@ -31,7 +30,6 @@ module.exports = {
           references: {
             model: {
               tableName: 'Teachers',
-              schema: 'public'
             },
             key: 'id'
           },

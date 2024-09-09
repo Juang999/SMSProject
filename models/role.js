@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     role_name: DataTypes.STRING
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'Role',
     hooks: {
       afterCreate: ({dataValues}) => {

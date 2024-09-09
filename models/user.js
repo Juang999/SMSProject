@@ -33,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-    schema: 'public',
     hooks: {
       afterCreate: ({dataValues}) => {
         Logging.info({message: 'created', ut_tablename: 'Users', ut_data: dataValues, ut_error: null});

@@ -34,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Student',
-    schema: 'public',
     paranoid: true,
     hooks: {
       afterCreate: ({dataValues}) => {

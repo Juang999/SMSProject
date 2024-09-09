@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     end_date: DataTypes.DATEONLY
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'LessonTeacher',
     hooks: {
       afterCreate: ({dataValues}) => {

@@ -16,7 +16,6 @@ module.exports = {
           references: {
             model: {
               tableName: 'Entities',
-              schema: 'public',
             },
             key: 'id'
           }
@@ -28,7 +27,6 @@ module.exports = {
           references: {
             model: {
               tableName: 'DetailEntities',
-              schema: 'public'
             },
             key: 'id'
           }

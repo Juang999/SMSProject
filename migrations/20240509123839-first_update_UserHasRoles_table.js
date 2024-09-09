@@ -18,8 +18,7 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
-              tableName: 'Users',
-              schema: 'public'
+              tableName: 'Users'
             },
             key: 'id'
           }
@@ -30,8 +29,7 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: {
-              tableName: 'Roles',
-              schema: 'public'
+              tableName: 'Roles'
             },
             key: 'id'
           }

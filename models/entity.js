@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.TEXT,
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'Entity',
     hooks: {
       afterCreate: ({dataValues}) => {

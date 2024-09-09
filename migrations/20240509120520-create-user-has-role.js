@@ -15,7 +15,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'Roles',
-            schema: 'public',
           },
           key: 'id'
         }
@@ -26,7 +25,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'Users',
-            schema: 'public',
           },
           key: 'id'
         }

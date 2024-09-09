@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'SubRegency',
     hooks: {
       afterCreate: ({dataValues}) => {

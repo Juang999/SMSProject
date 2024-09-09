@@ -59,7 +59,6 @@ module.exports = (sequelize, DataTypes) => {
     periode_id: DataTypes.INTEGER
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'Class',
     paranoid: true,
     hooks: {

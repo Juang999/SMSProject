@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     province_name: DataTypes.STRING
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'Province',
     hooks: {
       afterCreate: ({dataValues}) => {

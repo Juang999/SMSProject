@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     code_is_active: DataTypes.BOOLEAN
   }, {
     sequelize,
-    schema: 'public',
     modelName: 'CodeMaster',
     paranoid: true,
     hooks: {
