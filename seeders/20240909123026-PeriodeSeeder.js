@@ -1,4 +1,5 @@
 'use strict';
+
 const moment = require('moment');
 
 /** @type {import('sequelize-cli').Migration} */
@@ -13,19 +14,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('DetailEntities', [
+
+    return await queryInterface.bulkInsert('periodes', [
       {
-        entity_id: 1,
-        location_id: 13,
+        periode_code: 'PR20242025',
         is_active: true,
+        start_year: 2024,
+        end_year: 2025,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      }, {
-        entity_id: 1,
-        location_id: 14,
-        is_active: true,
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
       }
     ])
   },

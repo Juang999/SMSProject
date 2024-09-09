@@ -17,27 +17,21 @@ module.exports = {
 
     return queryInterface.bulkInsert('StudentClasses', [
       {
-        class_id: 3,
+        class_id: 2,
         student_id: 1,
-        status: 28,
+        status: 17,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        class_id: 3,
-        student_id: 4,
-        status: 28,
+        class_id: 2,
+        student_id: 2,
+        status: 17,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        class_id: 3,
-        student_id: 5,
-        status: 28,
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      }, {
-        class_id: 3,
-        student_id: 6,
-        status: 28,
+        class_id: 2,
+        student_id: 3,
+        status: 17,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }

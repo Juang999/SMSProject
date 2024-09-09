@@ -28,8 +28,8 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         email: 'bangkitjuangraharjo@gmail.com',
         phone_number_1: '081325507780',
-        entity_id: 8,
-        detail_entity_id: 13,
+        entity_id: 1,
+        detail_entity_id: 5,
       }, {
         fullname: 'Zulda Zakaria Badrudin',
         start_date: '2024-08-01',
@@ -42,8 +42,8 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         email: 'zuldabadrudin@gmail.com',
         phone_number_1: '62812357123',
-        entity_id: 8,
-        detail_entity_id: 13,
+        entity_id: 1,
+        detail_entity_id: 5,
       }, {
         fullname: 'Raditya Cahyadi Nugraha',
         start_date: '2024-08-01',
@@ -56,8 +56,8 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         email: 'radityacahyadit3@gmail.com',
         phone_number_1: '628796125512',
-        entity_id: 8,
-        detail_entity_id: 13,
+        entity_id: 1,
+        detail_entity_id: 5,
       }
     ]);
   },

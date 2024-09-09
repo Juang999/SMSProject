@@ -23,8 +23,8 @@ module.exports = {
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         class_code_master_id: 6,
-        entity_id: 8,
-        periode_id: 38,
+        entity_id: 1,
+        periode_id: 1,
       }
     ])
   },

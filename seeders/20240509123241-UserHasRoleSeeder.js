@@ -17,22 +17,22 @@ module.exports = {
 
     return queryInterface.bulkInsert('UserHasRoles', [
       {
-        user_id: 2,
+        user_id: 1,
         role_id: 1,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        user_id: 3,
+        user_id: 2,
         role_id: 2,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        user_id: 4,
+        user_id: 3,
         role_id: 3,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       }, {
-        user_id: 5,
+        user_id: 4,
         role_id: 4,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
