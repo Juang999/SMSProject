@@ -1,7 +1,7 @@
 const {CodeMaster, Sequelize} = require('../../../models')
 const {
     Logging
-} = require('../../../helper/helper.js');
+} = require('../../../helper/helper');
 
 class MasterController {
     store = async (req, res) => {
@@ -76,11 +76,9 @@ class MasterController {
                 return;
             }
 
-            let {code_code, code_field, code_name, code_description, code_is_active} = this.requestUpdate(req.body, data);
+            let {code_name, code_description, code_is_active} = this.requestUpdate(req.body, data);
 
             let result = await CodeMaster.update({
-                code_code,
-                code_field,
                 code_name,
                 code_description,
                 code_is_active,
@@ -149,8 +147,6 @@ class MasterController {
 
     requestUpdate = (request, dataCodeMaster) => {
         return {
-            code_code: (request.code_code) ? request.code_code : dataCodeMaster.code_code,
-            code_field: (request.code_field) ? request.code_field : dataCodeMaster.code_field,
             code_name: (request.code_name) ? request.code_name : dataCodeMaster.code_name,
             code_description: (request.code_description) ? request.code_description : dataCodeMaster.code_description,
             code_is_active: (request.code_is_active) ? request.code_is_active : dataCodeMaster.code_is_active,

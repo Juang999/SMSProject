@@ -3,7 +3,7 @@ const {
     CodeMaster,
     DetailPeriode,
     sequelize, Sequelize
-} = require('../../../models')
+} = require('../../../models/index.js')
 const moment = require('moment')
 const { where } = require('sequelize')
 const {

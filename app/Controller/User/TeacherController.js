@@ -1,6 +1,6 @@
 const {
     Teacher
-} = require('../../../models');
+} = require('../../../models/index.js');
 const {Op} = require('sequelize');
 const fs = require('fs');
 const {

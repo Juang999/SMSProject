@@ -1,13 +1,9 @@
-const Auth = require('./Auth.js');
-const Bcrypt = require('./Bcrypt.js');
-const Logging = require('./Logging.js');
-
 class Helper {
     constructor () {
         return {
-            Auth,
-            Bcrypt,
-            Logging,
+            Auth: require('./Auth.js'),
+            Bcrypt: require('./Bcrypt.js'),
+            Logging: require('./Logging.js'),
         }
     }
 }
