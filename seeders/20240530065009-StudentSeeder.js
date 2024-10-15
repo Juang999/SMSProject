@@ -30,7 +30,7 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         date_of_birth: '2010-07-01',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }, {
         name: 'Bakti',
         nis: '-',
@@ -45,7 +45,7 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         date_of_birth: '2010-07-02',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }, {
         name: 'Farhat Abbas',
         nis: '-',
@@ -60,7 +60,7 @@ module.exports = {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         date_of_birth: '2010-07-02',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }
     ])
   },

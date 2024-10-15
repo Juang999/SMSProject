@@ -1,7 +1,7 @@
-require('dotenv').config()
+const {parsed: config} = require('dotenv').config()
 
-const {genSaltSync, hashSync, compare} = require('bcrypt');
-const {SECRET_KEY} = process.env;
+const {genSaltSync, hashSync} = require('bcrypt');
+const {SECRET_KEY} = config;
 const Cryptojs = require('crypto-js');
 
 class Bcrypt {

@@ -29,7 +29,7 @@ module.exports = {
         email: 'bangkitjuangraharjo@gmail.com',
         phone_number_1: '081325507780',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }, {
         fullname: 'Zulda Zakaria Badrudin',
         start_date: '2024-08-01',
@@ -43,7 +43,7 @@ module.exports = {
         email: 'zuldabadrudin@gmail.com',
         phone_number_1: '62812357123',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }, {
         fullname: 'Raditya Cahyadi Nugraha',
         start_date: '2024-08-01',
@@ -57,7 +57,7 @@ module.exports = {
         email: 'radityacahyadit3@gmail.com',
         phone_number_1: '628796125512',
         entity_id: 1,
-        detail_entity_id: 5,
+        detail_entity_id: 1,
       }
     ]);
   },

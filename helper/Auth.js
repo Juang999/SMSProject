@@ -1,11 +1,11 @@
-require('dotenv').config();
+const {parsed: config} = require('dotenv').config({path: '../.env'});
 
 const {User, UserHasRole, Role, Sequelize} = require('../models')
 const {compare, compareSync} = require('bcrypt')
 const Bcrypt = require('./Bcrypt');
 const {get} = require('express-http-context');
 const jwt = require('jsonwebtoken');
-const {ACCESS_TOKEN_SECRET} = process.env;
+const {ACCESS_TOKEN_SECRET} = config;
 
 class Auth {
     attempt = async (request) => {
@@ -33,8 +33,8 @@ class Auth {
                 'password',
                 'student_id',
                 'teacher_id',
-                [Sequelize.literal('"user_has_role"."role_id"'), 'role_id'],
-                [Sequelize.literal('"user_has_role->detail_role"."role_name"'), 'role_name']
+                [Sequelize.literal('`user_has_role`.`role_id`'), 'role_id'],
+                [Sequelize.literal('`user_has_role->detail_role`.`role_name`'), 'role_name']
             ],
             include: [
                 {
@@ -52,7 +52,8 @@ class Auth {
             ],
             where: {
                 username: username
-            }
+            },
+            logging: false
         })
 
         return (dataUser) ? {

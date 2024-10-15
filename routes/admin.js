@@ -1,7 +1,12 @@
 const {Router} = require('express')
 const router = Router()
 const {Middleware, Requests} = require('../app/Kernel')
-const {ClassController, LessonController, MasterController, EntityController, TeacherController, StudentController, PeriodeController} = require('../app/Controller/Controller')
+const {
+    PeriodeController,
+    ClassController, LessonController, 
+    MasterController, EntityController, 
+    TeacherController, StudentController, 
+} = require('../app/Controller/Controller')
 
 /**
 *   router for code-master
