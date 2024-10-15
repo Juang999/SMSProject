@@ -11,7 +11,8 @@ class StudentController {
                 'name',
                 'nis',
                 'is_active',
-            ]
+            ],
+            logging: false
         })
         .then(result => {
             res.status(200)

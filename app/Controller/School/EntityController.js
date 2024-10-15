@@ -10,7 +10,9 @@ const {
 
 class EntityController {
     index = (req, res) => {
-        Entity.findAll()
+        Entity.findAll({
+            logging: false
+        })
             .then(result => {
                 res.status(200)
                     .json({
@@ -52,6 +54,7 @@ class EntityController {
                     'entity_name',
                     'is_active'
                 ],
+                logging: false,
                 include: [
                     {
                         model: DetailEntity,
@@ -103,6 +106,8 @@ class EntityController {
             city_regency: req.body.city_regency,
             sub_regency: req.body.sub_regency,
             address: req.body.address,
+        }, {
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -152,7 +157,8 @@ class EntityController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -194,7 +200,8 @@ class EntityController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -260,7 +267,8 @@ class EntityController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -299,7 +307,8 @@ class EntityController {
             let result = await DetailEntity.destroy({
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             })
 
             res.status(200)
@@ -324,7 +333,8 @@ class EntityController {
         let result = await Entity.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return {
@@ -337,7 +347,8 @@ class EntityController {
         let result = await DetailEntity.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return {

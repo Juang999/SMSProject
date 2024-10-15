@@ -12,7 +12,8 @@ let checkUserById = async (id) => {
     let dataUser = await User.findOne({
         where: {
             id: decryptedId
-        }
+        },
+        logging: false
     })
 
     set('header_data', dataUser.dataValues.id);

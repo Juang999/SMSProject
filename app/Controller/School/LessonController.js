@@ -16,7 +16,8 @@ class LessonController {
             attributes: [
                 'id',
                 'nama_pelajaran'
-            ]
+            ],
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -118,7 +119,8 @@ class LessonController {
                 ],
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             });
 
             res.status(200)
@@ -144,6 +146,8 @@ class LessonController {
             nama_pelajaran: req.body.nama_pelajaran,
             tipe_pelajaran: req.body.tipe_pelajaran,
             description: req.body.description
+        }, {
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -191,7 +195,8 @@ class LessonController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -231,7 +236,8 @@ class LessonController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             });
 
             res.status(200)
@@ -263,6 +269,8 @@ class LessonController {
                 class_id: class_id,
                 periode_id: req.body.periode_id,
                 detail_periode_id: req.body.detail_periode_id,
+            }, {
+                logging: false
             })
 
             res.status(200)
@@ -311,7 +319,8 @@ class LessonController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             });
 
             res.status(200)
@@ -351,7 +360,8 @@ class LessonController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -418,7 +428,8 @@ class LessonController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             
@@ -444,7 +455,8 @@ class LessonController {
         let result = await LessonTeacher.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         });
 
         return (result) ? true: false;
@@ -474,7 +486,8 @@ class LessonController {
         let result = await LessonMaster.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return {
@@ -487,7 +500,8 @@ class LessonController {
         let result = await DetailLesson.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return {
@@ -504,7 +518,8 @@ class LessonController {
             ],
             order: [
                 ['createdAt', 'DESC']
-            ]
+            ],
+            logging: false
         })
 
         return {
@@ -521,7 +536,8 @@ class LessonController {
             ],
             where: {
                 id: periodeId
-            }
+            },
+            logging: false
         })
 
         return {
@@ -539,7 +555,8 @@ class LessonController {
             ],
             where: {
                 id: classId
-            }
+            },
+            logging: false
         })
 
         return {id, entity_id, detail_entity_id};

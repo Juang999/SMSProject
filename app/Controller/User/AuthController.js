@@ -1,19 +1,19 @@
-require('dotenv').config()
-
 const jwt = require('jsonwebtoken')
+const path = require('path');
+const {parsed: config} = require('dotenv').config({path: path.resolve('./.env')})
 const {
     User, Role,
     UserHasRole,
     Sequelize, sequelize
 } = require('../../../models')
 const {Auth} = require('../../../helper/helper.js')
-const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env
+const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = config
 
 class AuthController {
     login = async (req, res) => {
         try {
             let {status, data} = await Auth.attempt(req.body)
-            
+
             if (status == false) {
                 res.status(300)
                     .json({

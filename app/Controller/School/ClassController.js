@@ -43,7 +43,8 @@ class ClassController {
                 ],
                 where: {
                     periode_id: periodeId
-                }
+                },
+                logging: false
             })
 
             res.status(200)
@@ -164,7 +165,8 @@ class ClassController {
                 ],
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             })
             
             res.status(200)
@@ -198,6 +200,8 @@ class ClassController {
                 entity_id: req.body.entity_id,
                 detail_entity_id: req.body.detail_entity_id,
                 periode_id: req.body.periode_id,
+            }, {
+                logging: false
             })
 
             res.status(200)
@@ -249,7 +253,8 @@ class ClassController {
                     where: {
                         id: req.params.id
                     },
-                    individualHooks: true
+                    individualHooks: true,
+                    logging: false
                 }
             )
 
@@ -290,7 +295,8 @@ class ClassController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
 
             res.status(200)
@@ -319,6 +325,8 @@ class ClassController {
             homeroom_teacher_type: req.body.homeroom_teacher_type,
             start_date: req.body.start_date,
             is_active: true,
+        }, {
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -359,7 +367,8 @@ class ClassController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
     
             res.status(200)
@@ -385,6 +394,8 @@ class ClassController {
             class_id: req.body.class_id,
             student_id: req.body.student_id,
             status: req.body.status,
+        }, {
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -425,7 +436,8 @@ class ClassController {
                 where: {
                     id: req.params.id
                 },
-                individualHooks: true
+                individualHooks: true,
+                logging: false
             })
     
             res.status(200)
@@ -450,7 +462,8 @@ class ClassController {
         let result = await Class.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         });
 
         return {
@@ -463,7 +476,8 @@ class ClassController {
         let result = await HomeroomTeacher.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return (result) ? true : false
@@ -473,7 +487,8 @@ class ClassController {
         let result = await StudentClass.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return (result) ? true : false;
@@ -486,7 +501,8 @@ class ClassController {
             ],
             where: {
                 id: id
-            }
+            },
+            logging: false
         });
 
         return `${code_name}${grade}`;
@@ -514,7 +530,8 @@ class ClassController {
             ],
             order: [
                 ['createdAt', 'DESC']
-            ]
+            ],
+            logging: false
         });
 
         return id;

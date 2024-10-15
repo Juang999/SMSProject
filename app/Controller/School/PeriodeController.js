@@ -21,7 +21,8 @@ class PeriodeController {
             ],
             order: [
                 ['start_year', 'ASC']
-            ]
+            ],
+            logging: false
         })
         .then(result => {
             res.status(200)
@@ -87,7 +88,8 @@ class PeriodeController {
                 ],
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             })
     
             res.status(200)
@@ -117,7 +119,8 @@ class PeriodeController {
                         start_year: req.body.start_year,
                         end_year: req.body.end_year,
                     }, {
-                        transaction: t
+                        transaction: t,
+                        logging: false
                     })
 
                     let extractedResult = result.dataValues;
@@ -325,7 +328,7 @@ class PeriodeController {
             }
         })
 
-        let rawResult = await DetailPeriode.bulkCreate(bulkData, {transaction: transaction})
+        let rawResult = await DetailPeriode.bulkCreate(bulkData, {transaction: transaction, logging: false})
 
         let result = rawResult.map(data => {
             return data.dataValues;
@@ -345,7 +348,8 @@ class PeriodeController {
             ],
             where: {
                 id: id
-            }
+            },
+            logging: false
         })
 
         return {
@@ -360,7 +364,8 @@ class PeriodeController {
                 id: id
             },
             force: true,
-            inidividualHooks: true
+            inidividualHooks: true,
+            logging: false
         }, {
             transaction: transaction
         })

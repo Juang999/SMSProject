@@ -12,6 +12,8 @@ class MasterController {
                 code_name: req.body.code_name,
                 code_description: req.body.code_description,
                 code_is_active: true
+            }, {
+                logging: false
             })
     
             res.status(200)
@@ -39,7 +41,8 @@ class MasterController {
             ],
             order: [
                 ['code_field', 'ASC']
-            ]
+            ],
+            logging: false,
         })
         .then(result => {
             res.status(200)
@@ -85,7 +88,8 @@ class MasterController {
             }, {
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             })
 
             res.status(200)
@@ -124,7 +128,8 @@ class MasterController {
             let result = await CodeMaster.destroy({
                 where: {
                     id: req.params.id
-                }
+                },
+                logging: false
             });
     
             res.status(200)
@@ -157,7 +162,8 @@ class MasterController {
         let result = await CodeMaster.findOne({
             where: {
                 id: id
-            }
+            },
+            logging: false,
         })
 
         return {
@@ -407,7 +413,7 @@ class MasterController {
     }
 
     formCode = async (field) => {
-        let totalData = await CodeMaster.count({where: {code_field: field}})
+        let totalData = await CodeMaster.count({where: {code_field: field}, logging: false})
 
         return `${field.toUpperCase()}${totalData + 1}`
     }
