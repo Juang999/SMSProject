@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const {parsed: config} = require('dotenv').config()
+const {parsed: config} = require('dotenv').config({path: '../.env'})
 
 /**
  * Module dependencies.

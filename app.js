@@ -27,12 +27,12 @@ app.use(middleware);
 /**
  * API Routes
 */
-app.use('/Api/users', require('./routes/users'));
-app.use('/Api/admin', require('./routes/admin'));
-app.use('/Api/master', require('./routes/master'));
-app.use('/Api/teacher', require('./routes/teacher'));
-app.use('/Api/student', require('./routes/student'));
-app.use('/Api/headmaster', require('./routes/headmaster'));
+app.use('/users', require('./routes/users'));
+app.use('/admin', require('./routes/admin'));
+app.use('/master', require('./routes/master'));
+app.use('/teacher', require('./routes/teacher'));
+app.use('/student', require('./routes/student'));
+app.use('/headmaster', require('./routes/headmaster'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
